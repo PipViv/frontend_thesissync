@@ -1,0 +1,25 @@
+.side-menu {
+    width: 250px; /* Ancho del menú cuando esté abierto */
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -250px; /* Posición inicial a la derecha */
+    background-color: #fff;
+    transition: right 0.3s ease;
+    overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Opcional: sombra */
+  }
+  
+  .side-menu.open {
+    right: 0; /* Mostrar el menú a la derecha */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    color: #333; /* Cambia el color a tu elección */
+  }

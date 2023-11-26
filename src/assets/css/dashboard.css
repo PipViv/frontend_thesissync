@@ -1,0 +1,58 @@
+.customButtonTesis {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* Hace el botón completamente redondo */
+  background-color: #FFC107;
+  /* Color de fondo del botón (ajusta a tu preferencia) */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra del botón */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* Efecto de transición al pasar el ratón por encima */
+
+  /* Estilos al pasar el ratón por encima */
+  &:hover {
+    background-color: #FFD700;
+    /* Cambia el color de fondo al pasar el ratón por encima */
+  }
+}
+
+.color-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 8px solid transparent;
+  border-top-color: gray;
+  border-bottom-color: gray;
+  border-right-color: gray;
+  border-left-color: gray;
+  display: inline-block;
+  position: relative;
+}
+
+.red {
+  border-left-color: transparent;
+  border-right-color: transparent;
+  background-color: red;
+}
+
+.orange {
+  border-left-color: transparent;
+  border-right-color: transparent;
+  background-color: orange;
+}
+
+.green {
+  border-left-color: transparent;
+  border-right-color: transparent;
+  background-color: green;
+}
+

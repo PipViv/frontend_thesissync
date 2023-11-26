@@ -1,0 +1,19 @@
+.thesisCard{
+    
+        margin: 20% 22% 30% 23%;
+        padding: 40px;
+        background-color: #fafafa;
+        border-radius: 5%;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    
+}
+
+.inputsText{
+    margin-top: 8px;
+    margin-bottom: 20px;
+
+}
+
+.inputTextArea{
+
+}

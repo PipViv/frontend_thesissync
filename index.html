@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ThesisSync</title>
+
+    <style>
+      .login-bg {
+        background-image: url('src/assets/img/FondoUnicatolicaBanner.png');
+      }
+
+      .signup-bg {
+        background-image: url('src/assets/img/fondoThesis.webp');
+      }
+    </style>
+
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Obtén la ruta actual
+      var currentPath = window.location.pathname;
+
+      // Define la clase CSS para el fondo
+      var backgroundClass = currentPath === '/' ? 'login-bg' : 'signup-bg';
+
+      // Aplica la clase CSS al body
+      document.body.classList.add(backgroundClass);
+      </script>
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+.loginCard {
+    margin: 20% 40% 20% 40%;
+    padding: 35px;
+    background-color: #fafafa;
+    border-radius: 5%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.imageDiv {
+    width: 100px;
+    /* Ancho del div */
+    height: 100px;
+    /* Altura del div */
+    border-radius: 50%;
+    /* Hace que el div tenga bordes redondeados (50% del ancho) */
+    overflow: hidden;
+    /* Oculta cualquier parte de la imagen que se salga del div */
+    display: flex;
+    /* Usar flexbox para centrar vertical y horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    justify-content: center;
+    /* Centra horizontalmente */
+    position: relative;
+    /* Establece la posición relativa para posicionar la imagen interna */
+    text-align: center;
+    margin: 0% 50% 0% 32%;
+}
+
+.imagen {
+    background-image: url('../img/unicatolicaLogo.png');
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen según sea necesario */
+    width: 100%;
+    /* Ajusta el tamaño de la imagen al 100% del div */
+    height: 100%;
+    /* Ajusta el tamaño de la imagen al 100% del div */
+    object-fit: cover;
+    /* Ajusta la imagen para cubrir todo el div sin deformarla */
+    border-radius: 50%;
+    /* Hace que la imagen tenga bordes redondeados */
+    text-align: center;
+}
+
+.btnLogin {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
