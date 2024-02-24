@@ -58,13 +58,16 @@ export default function Dashboard() {
           </Modal>
         </>
       );
-    } else if (rol == 2) {
+    } 
+    else if (rol == 2) {
+
       // Renderiza el componente específico para id === '2'
       return <>
       <Header />
       <TeacherPanel id_user={id}/>
       </>;
-    } else {
+    } 
+    else {
       return <>
       <div>Panel  de admin</div>
       </>;
