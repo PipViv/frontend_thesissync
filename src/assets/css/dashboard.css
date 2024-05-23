@@ -1,3 +1,10 @@
+/* dashboard.css */
+.main-content {
+  min-height: calc(100vh - 60px); /* Altura mínima del contenido principal menos la altura del footer */
+  padding-bottom: 60px; /* Espacio para el footer */
+}
+
+/* Estilos del botón de subir tesis */
 .customButtonTesis {
   position: fixed;
   bottom: 30px;
@@ -5,54 +12,37 @@
   z-index: 999;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  /* Hace el botón completamente redondo */
-  background-color: #FFC107;
-  /* Color de fondo del botón (ajusta a tu preferencia) */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* Sombra del botón */
+  border-radius: 50%; /* Hace el botón completamente redondo */
+  background-color: #FFC107; /* Color de fondo del botón (ajusta a tu preferencia) */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del botón */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
-  /* Efecto de transición al pasar el ratón por encima */
-
-  /* Estilos al pasar el ratón por encima */
-  &:hover {
-    background-color: #FFD700;
-    /* Cambia el color de fondo al pasar el ratón por encima */
-  }
+  transition: background-color 0.3s; /* Efecto de transición al pasar el ratón por encima */
 }
 
-.color-indicator {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 8px solid transparent;
-  border-top-color: gray;
-  border-bottom-color: gray;
-  border-right-color: gray;
-  border-left-color: gray;
-  display: inline-block;
-  position: relative;
+.customButtonTesis:hover {
+  background-color: #FFD700; /* Cambia el color de fondo al pasar el ratón por encima */
 }
 
-.red {
-  border-left-color: transparent;
-  border-right-color: transparent;
-  background-color: red;
+/* footer.css */
+.footer {
+  background-color: #f8f9fa;
+  padding: 1rem 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #dee2e6;
 }
 
-.orange {
-  border-left-color: transparent;
-  border-right-color: transparent;
-  background-color: orange;
+.footer .container {
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
-.green {
-  border-left-color: transparent;
-  border-right-color: transparent;
-  background-color: green;
+.footer p {
+  margin: 0;
+  color: #6c757d;
 }
-

@@ -1,0 +1,138 @@
+/* Estilos específicos para el componente ProfileComponent */
+
+/* Estilos para el contenedor principal */
+.profile-container {
+    margin-top: 20px;
+}
+
+/* Estilos para la imagen de perfil */
+.profile-image {
+    border-radius: 50%;
+    /* Bordes redondeados */
+}
+
+/* Estilos para los elementos de lista */
+.profile-list-item {
+    border: none;
+    background-color: #f8f9fa;
+    /* Color de fondo */
+}
+
+.profile-list-item:first-child {
+    border-top-left-radius: 0;
+    /* Redondear la esquina superior izquierda del primer elemento */
+    border-top-right-radius: 0;
+    /* Redondear la esquina superior derecha del primer elemento */
+}
+
+.profile-list-item:last-child {
+    border-bottom-left-radius: 0;
+    /* Redondear la esquina inferior izquierda del último elemento */
+    border-bottom-right-radius: 0;
+    /* Redondear la esquina inferior derecha del último elemento */
+}
+
+.profile-list-item .pull-left {
+    float: left;
+}
+
+.profile-list-item .pull-right {
+    float: right;
+}
+
+/* Estilos para los campos de formulario */
+.profile-form-group {
+    margin-bottom: 20px;
+}
+
+.profile-form-control {
+    border: 1px solid #ced4da;
+    /* Borde del campo de entrada */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    padding: 10px;
+    /* Espacio interno */
+}
+
+.profile-form-control[readonly] {
+    background-color: #e9ecef;
+    /* Color de fondo del campo de solo lectura */
+}
+
+/* Estilos para el botón */
+.profile-btn-primary {
+    background-color: #007bff;
+    /* Color de fondo del botón primario */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    padding: 10px 20px;
+    /* Espacio interno */
+    color: #fff;
+    /* Color del texto */
+    cursor: pointer;
+    /* Cambiar el cursor al pasar por encima */
+}
+
+.profile-btn-primary:hover {
+    background-color: #0056b3;
+    /* Color de fondo al pasar el ratón */
+}
+
+/* Estilos para las pestañas */
+.profile-tab-content {
+    padding: 20px;
+}
+
+.profile-tab-pane {
+    display: block;
+    overflow: hidden;
+}
+
+.profile-tab-pane:first-child {
+    border-top-left-radius: 5px;
+    /* Redondear la esquina superior izquierda de la primera pestaña */
+    border-top-right-radius: 5px;
+    /* Redondear la esquina superior derecha de la primera pestaña */
+}
+
+.profile-tab-pane:last-child {
+    border-bottom-left-radius: 5px;
+    /* Redondear la esquina inferior izquierda de la última pestaña */
+    border-bottom-right-radius: 5px;
+    /* Redondear la esquina inferior derecha de la última pestaña */
+}
+
+/* Estilos específicos para el componente ProfileComponent */
+
+/* Estilos para los labels */
+.profile-label {
+    font-weight: bold; /* Texto en negrita */
+    margin-bottom: 5px; /* Margen inferior */
+  }
+  
+  /* Estilos para el panel */
+  .profile-panel {
+    border: 1px solid #ccc; /* Borde sutil */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 15px; /* Margen inferior */
+  }
+
+/* Estilos para la línea de separación */
+.profile-divider {
+    height: 1px;
+    /* Altura de la línea */
+    background-color: #ced4da;
+    /* Color de la línea */
+    margin-bottom: 20px;
+    /* Margen inferior */
+}
+
+/* Estilos para los Form.Group */
+.profile-form-group {
+    margin-bottom: 10px;
+    /* Margen inferior de 10px */
+}

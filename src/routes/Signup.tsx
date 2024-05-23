@@ -1,25 +1,38 @@
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import { useAuth } from "../auth/AuthProvider";
 import { Navigate, useNavigate } from "react-router-dom";
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import '../assets/css/signup.css'
 import { API_URL } from '../constants/constants';
 import { AuthResponseError } from '../types/types';
 
+interface Carrera {
+  id: string;
+  nombre: string;
+}
+
+
 export default function Signup() {
 
-  const [codigo, setCodigo] = useState("");
+  //const [codigo, setCodigo] = useState("");
   const [cedula, setCedula] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
-  const [correo, setCorreo] = useState("");
+  const [correoInsti, setCorreoInsti] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [carrera, setCarrera] = useState("");
+  const [carrerasList, setCarrerasList] = useState<Carrera[]>([]);
+
   const [errorResponse, setErrorResponse] = useState("");
-  const rol = 2;
+  const rol = 3;
 
   const auth = useAuth();
   const goTo = useNavigate();
+
+  useEffect(() => {
+    // Llamar a la función para obtener las carreras cuando el componente se monta
+    obtenerCarreras();
+  }, []);
 
   const handleCarreraChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setCarrera(e.target.value);
@@ -29,17 +42,16 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/crear/estudiante`, {
+      const response = await fetch(`${API_URL}/create/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          codigo,
           cedula,
           nombre,
           apellido,
-          correo,
+          correoInsti,
           carrera,
           contrasena,
           rol,
@@ -61,6 +73,26 @@ export default function Signup() {
     }
 
   }
+  const obtenerCarreras = async () => {
+    try {
+      const response = await fetch(`${API_URL}/carreras`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCarrerasList(data); // Almacenar las carreras en el estado local
+      } else {
+        console.log('Error al obtener las carreras');
+      }
+    } catch (error) {
+      console.error('Error: ', error);
+    }
+  };
+
 
   if (auth.isAuthenticated) {
     return <Navigate to="/dashboard" />;
@@ -69,24 +101,16 @@ export default function Signup() {
   return (
     <>
       <div className="signupCard">
-        <h3>Registro de estudiante</h3>
+        <div><h3>Registro de estudiante</h3></div>
+        
         <Form className="form" onSubmit={handleSubmit}>
           {!!errorResponse &&
             <Alert key="danger" variant="danger">
               {errorResponse}
             </Alert>}
           <Row>
-            <Col md={3}>
-              <Form.Group>
-                <Form.Label>Codigo</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={codigo}
-                  onChange={(e) => setCodigo(e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={9}>
+            
+            <Col md={12}>
               <Form.Group>
                 <Form.Label>Cedula</Form.Label>
                 <Form.Control
@@ -110,7 +134,7 @@ export default function Signup() {
             </Col>
             <Col md={6}>
               <Form.Group>
-                <Form.Label>Apellido</Form.Label>
+                <Form.Label>Apellidos</Form.Label>
                 <Form.Control
                   type="text"
                   value={apellido}
@@ -123,19 +147,23 @@ export default function Signup() {
             <Form.Label>Correo institucional</Form.Label>
             <Form.Control
               type="email"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              value={correoInsti}
+              onChange={(e) => setCorreoInsti(e.target.value)}
             />
           </Form.Group>
+          
           <Form.Group>
             <Form.Label>Carrera</Form.Label>
             <Form.Select aria-label="Default select example" value={carrera} onChange={handleCarreraChange}>
               <option value="0">Seleccionar carrera</option>
-              <option value="1">Tecnologia en Desarrollo de Software</option>
-              <option value="2">Ingenieria de Sistemas</option>
-              <option value="3">Ingenieria Industrial</option>
+              {carrerasList.map((carrera) => (
+                <option key={carrera.id} value={carrera.id}>
+                  {carrera.nombre}
+                </option>
+              ))}
             </Form.Select>
           </Form.Group>
+
           <Form.Group>
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
@@ -144,8 +172,8 @@ export default function Signup() {
               onChange={(e) => setContrasena(e.target.value)}
             />
           </Form.Group>
-          <Button className="btnSignup" type="submit">
-            Registrarse
+          <Button variant="success" className="btnSignup" type="submit">
+            Registrarme
           </Button>
         </Form>
       </div>

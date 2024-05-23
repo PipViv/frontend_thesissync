@@ -1,0 +1,22 @@
+.period-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .period-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+  
+  .period-item h5 {
+    margin-bottom: 5px;
+  }
+  
+  .period-item p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #6c757d;
+  }
+  

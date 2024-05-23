@@ -4,7 +4,7 @@ export default function Footer() {
         <>
             <footer className="footer">
                 <div className="container">
-                    <p>&copy; {new Date().getFullYear()} Tu Empresa - Todos los derechos reservados</p>
+                    <p>&copy; {new Date().getFullYear()} SEMILLERO SERENDIPIA Fundacion Católica Lumen Genitum - Todos los derechos reservados</p>
                 </div>
             </footer>
         </>);
