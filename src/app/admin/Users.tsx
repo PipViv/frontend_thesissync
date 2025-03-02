@@ -1,22 +1,37 @@
-import { useEffect, useState } from "react";
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import { API_URL, API_URL_ADMON } from '../../constants/constants';
 import { User } from "../../types/types";
 import { Button, Form, FormControl, InputGroup, Modal, Table } from "react-bootstrap";
 
 // Users Component
 export default function Users() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [show, setShow] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-  const [showNewUserModal, setShowNewUserModal] = useState(false);
   const [cedula, setCedula] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [correoInsti, setCorreoInsti] = useState("");
   const [celular, setCelular] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [correoAlter, setCorreoAlter] = useState("");
+  const [direccion, setDireccion] = useState("");
   const [contrasena, setContrasena] = useState("");
+  const [programaId, setProgramaId] = useState("");
+  // const [rol, setRol] = useState("2"); // Default: Estudiante
+
+  const [users, setUsers] = useState<User[]>([]);
+  const [show, setShow] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const [showNewUserModal, setShowNewUserModal] = useState(false);
+  // const [cedula, setCedula] = useState("");
+  // const [nombre, setNombre] = useState("");
+  // const [apellido, setApellido] = useState("");
+  // const [correoInsti, setCorreoInsti] = useState("");
+  // const [celular, setCelular] = useState("");
+  // const [contrasena, setContrasena] = useState("");
   const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
-  const rol = 2;
+  // const [programaId, setProgramaId] = useState("");
+  const [programas, setProgramas] = useState<{ id: number, nombre: string }[]>([]);
+
+  const rol = 3;
 
   const handleClose = () => setShow(false);
   const handleShow = (id: number) => {
@@ -65,27 +80,59 @@ export default function Users() {
     setShowNewUserModal(true);
   };
 
+  const fetchProgramas = async () => {
+    try {
+      const response = await fetch(`${API_URL_ADMON}/programs/list/create`);
+      if (!response.ok) throw new Error("Error fetching programs");
+      
+      const data = await response.json();
+      
+      // Transformar los datos para que muestre "nombre - jornada"
+      const formattedData = data.map((programa: { id: number, nombre: string, Jornada: string }) => ({
+        id: programa.id,
+        nombre: `${programa.nombre} - ${programa.Jornada}`
+      }));
+      
+      setProgramas(formattedData);
+    } catch (error) {
+      console.error("Error fetching programs:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (showNewUserModal) {
+      fetchProgramas();
+    }
+  }, [showNewUserModal]);
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+  
+    const usuarioData = {
+      cedula,
+      nombre,
+      apellido,
+      correoInsti,
+      celular,
+      contrasena,
+      rol,
+      carrera: programaId, // Asegurar que el ID del programa sea enviado correctamente
+      correoAlter: "", // Agregar si se requiere
+      direccion: "", // Agregar si se requiere
+      telefono: celular, // Si el backend espera "telefono", igualarlo a celular
+    };
+  
     try {
       const response = await fetch(`${API_URL}/create/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          cedula,
-          nombre,
-          apellido,
-          correoInsti,
-          contrasena,
-          rol,
-        }),
+        body: JSON.stringify(usuarioData),
       });
-
+  
+      const data = await response.json();
+  
       if (response.ok) {
-        const data = await response.json();
         alert(data.body.message);
         fetchUsers();
         setCedula("");
@@ -94,14 +141,52 @@ export default function Users() {
         setCorreoInsti("");
         setCelular("");
         setContrasena("");
+        setProgramaId("");
       } else {
-        const data = await response.json();
         alert(data.body.error);
       }
     } catch (error) {
-      console.error("Error: ", error);
+      console.error("Error:", error);
     }
   }
+  
+  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await fetch(`${API_URL}/create/user`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         cedula,
+  //         nombre,
+  //         apellido,
+  //         correoInsti,
+  //         contrasena,
+  //         rol,
+  //       }),
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       alert(data.body.message);
+  //       fetchUsers();
+  //       setCedula("");
+  //       setNombre("");
+  //       setApellido("");
+  //       setCorreoInsti("");
+  //       setCelular("");
+  //       setContrasena("");
+  //     } else {
+  //       const data = await response.json();
+  //       alert(data.body.error);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error: ", error);
+  //   }
+  // }
 
   // Filtrar usuarios según el término de búsqueda
   const filteredUsers = users.filter(user =>
@@ -171,7 +256,7 @@ export default function Users() {
               <td>{user.nombre} {user.apellido}</td>
               <td>{user.cedula}</td>
               <td>{user.correo}</td>
-              <td>{user.programas.map(programa => (
+              <td>{user.programas.map((programa: { id: Key | null | undefined; nombre: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
                 <div key={programa.id}>{programa.nombre}</div>
               ))}</td>
               <td>
@@ -205,8 +290,73 @@ export default function Users() {
           <Button variant="primary" onClick={handleDelete}>Aceptar</Button>
         </Modal.Footer>
       </Modal>
-
       <Modal show={showNewUserModal} onHide={() => setShowNewUserModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Crear Nuevo Usuario</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Cédula</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese su cédula" value={cedula} onChange={(e) => setCedula(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Nombres</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese los nombres" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Apellidos</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese sus apellidos" value={apellido} onChange={(e) => setApellido(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Correo Institucional</Form.Label>
+            <Form.Control type="email" placeholder="Ingrese su correo" value={correoInsti} onChange={(e) => setCorreoInsti(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Correo Alternativo</Form.Label>
+            <Form.Control type="email" placeholder="Ingrese su correo alternativo" value={correoAlter} onChange={(e) => setCorreoAlter(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Teléfono Celular</Form.Label>
+            <Form.Control type="tel" placeholder="Ingrese su número" value={celular} onChange={(e) => setCelular(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Teléfono Fijo</Form.Label>
+            <Form.Control type="tel" placeholder="Ingrese su teléfono fijo" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Dirección</Form.Label>
+            <Form.Control type="text" placeholder="Ingrese su dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control type="password" placeholder="Ingrese su contraseña" value={contrasena} onChange={(e) => setContrasena(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Programa Académico</Form.Label>
+            <Form.Select value={programaId} onChange={(e) => setProgramaId(e.target.value)}>
+              <option value="">Seleccione un programa</option>
+              {programas.map((programa) => (
+                <option key={programa.id} value={programa.id}>
+                  {programa.nombre}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Button variant="primary" type="submit">Enviar</Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+      {/* <Modal show={showNewUserModal} onHide={() => setShowNewUserModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Crear Nuevo Usuario</Modal.Title>
         </Modal.Header>
@@ -245,7 +395,7 @@ export default function Users() {
             <Button variant="primary" type="submit">Enviar</Button>
           </Form>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

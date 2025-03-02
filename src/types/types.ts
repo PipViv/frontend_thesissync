@@ -92,7 +92,9 @@ export interface User {
     apellido: string;
     cedula: string;
     correo: string;
-    programas:{id:number, nombre:string}
+    programas:{
+      [x: string]: any;id:number, nombre:string
+}
 }
 
 export interface Teacher {

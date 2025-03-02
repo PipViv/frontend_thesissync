@@ -137,7 +137,7 @@ console.log('credenciales', doc, user)
                         <div className="chat-container">
                             <div className="chat-messages" ref={messagesEndRef}>
                                 {messages.map((message) => (
-                                    <div key={message.id} className={`message-container ${message.autor !== 1 ? 'message-left' : 'message-right'}`}>
+                                    <div key={message.id} className={`message-container ${message.autor !== user ? 'message-left' : 'message-right'}`}>
                                         <div className="message-content">
                                             <div className="message-author">
                                                 <strong><u>{message.autor_nombre}</u></strong>
