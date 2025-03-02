@@ -8,6 +8,7 @@ import PeriodsConfig from './PeriodsConfig';
 import moment from 'moment';
 import { API_URL_ADMON } from '../../constants/constants';
 import { useAuth } from '../../auth/AuthProvider';
+import logo from '../../assets/img/cooltext477327440798987_white.png'; // Ruta correcta del logo
 
 interface HeaderProps {
   id: number;
@@ -39,7 +40,7 @@ export default function Header({ id, rol }: HeaderProps) {
         const data = await fetchActivePeriods();
         setPeriods(data);
         setAlerts(generateAlerts(data));
-      } catch (err:unknown) {
+      } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
@@ -151,11 +152,19 @@ export default function Header({ id, rol }: HeaderProps) {
 
   return (
     <>
-      <header style={{ height: '70px', backgroundColor: 'black', position: 'relative' }}>
+      {/* <header style={{ height: '70px', backgroundColor: 'black', position: 'relative' }}>
         <Container />
         <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '5px', backgroundColor: '#485EFD' }}></div>
         <Button onClick={handleSignout} variant="outline-light" style={{ position: 'absolute', top: '15px', right: '15px' }}>Cerrar sesión</Button>
 
+      </header> */}
+      <header style={{ height: '70px', backgroundColor: 'black', position: 'relative', display: 'flex', alignItems: 'center', padding: '0 20px' }}>
+        <img src={logo} alt="ThesisSync Logo" style={{ height: '50px', marginRight: '20px' }} /> 
+        <Container />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '5px', backgroundColor: '#485EFD' }}></div>
+        <Button onClick={handleSignout} variant="outline-light" style={{ position: 'absolute', top: '15px', right: '15px' }}>
+          Cerrar sesión
+        </Button>
       </header>
 
       <Tabs defaultActiveKey="home" id="justify-tab-example" className="mb-3" justify>

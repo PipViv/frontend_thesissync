@@ -89,7 +89,7 @@ export default function Dashboard() {
           </Modal>
         </>
       case 2:
-        return <div>Another Component</div>;
+        return <div></div>;
       case 3:
         return (
           <>

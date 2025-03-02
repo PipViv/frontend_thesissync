@@ -46,3 +46,15 @@
     margin-top: 25px;
     margin-bottom: 15px;
 }
+
+.loginContainer {
+    background-image: url('../img/library-6237477_1280.jpg'); /* Ajusta la ruta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -93,7 +93,7 @@ const PeriodsConfig: React.FC = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL_ADMON}/all/periods`, {
+      const response = await fetch(`${API_URL_ADMON}/periods`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

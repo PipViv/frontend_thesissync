@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ThesisForm from './routes/ThesisForm.tsx';
 import TeacherPanel from './app/admin/Teachers.tsx';
 import SignupDo from './app/Teacher/SignupDo.tsx';
-import UserPanel from './app/users/Profile.tsx';
+// import UserPanel from './app/users/Profile.tsx';
 //import './assets/css/index.css'
 
 //Rutas

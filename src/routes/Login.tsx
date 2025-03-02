@@ -52,44 +52,85 @@ export default function Login() {
   if (auth.isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
-
   return (
-    <div className="loginCard">
-      <div className="imageDiv">
-        <div className="imagen"></div>
-      </div>
-      <Form className="form" onSubmit={handleSubmit}>
-        {!!errorResponse && (
-          <Alert key="danger" variant="danger">
-            {errorResponse}
-          </Alert>
-        )}
-        <Form.Group>
-          <Form.Label>Usuario</Form.Label>
-          <Form.Control
-            type="text"
-            value={usuario}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            value={contrasena}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button id='btnlogin' className="btnLogin" type="submit" variant="primary" disabled={loading}>
-          {loading ? (
-            <>
-              Cargando... <Spinner animation="border" size="sm" />
-            </>
-          ) : (
-            'Iniciar sesión'
+    <div className="loginContainer">
+      <div className="loginCard">
+        <div className="imageDiv">
+          <div className="imagen"></div>
+        </div>
+        <Form className="form" onSubmit={handleSubmit}>
+          {!!errorResponse && (
+            <Alert key="danger" variant="danger">
+              {errorResponse}
+            </Alert>
           )}
-        </Button>
-      </Form>
+          <Form.Group>
+            <Form.Label>Usuario</Form.Label>
+            <Form.Control
+              type="text"
+              value={usuario}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              value={contrasena}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button id='btnlogin' className="btnLogin" type="submit" variant="primary" disabled={loading}>
+            {loading ? (
+              <>
+                Cargando... <Spinner animation="border" size="sm" />
+              </>
+            ) : (
+              'Iniciar sesión'
+            )}
+          </Button>
+        </Form>
+      </div>
     </div>
   );
+  
+  // return (
+  //   <div className="loginCard">
+  //     <div className="imageDiv">
+  //       <div className="imagen"></div>
+  //     </div>
+  //     <Form className="form" onSubmit={handleSubmit}>
+  //       {!!errorResponse && (
+  //         <Alert key="danger" variant="danger">
+  //           {errorResponse}
+  //         </Alert>
+  //       )}
+  //       <Form.Group>
+  //         <Form.Label>Usuario</Form.Label>
+  //         <Form.Control
+  //           type="text"
+  //           value={usuario}
+  //           onChange={(e) => setUsername(e.target.value)}
+  //         />
+  //       </Form.Group>
+  //       <Form.Group>
+  //         <Form.Label>Contraseña</Form.Label>
+  //         <Form.Control
+  //           type="password"
+  //           value={contrasena}
+  //           onChange={(e) => setPassword(e.target.value)}
+  //         />
+  //       </Form.Group>
+  //       <Button id='btnlogin' className="btnLogin" type="submit" variant="primary" disabled={loading}>
+  //         {loading ? (
+  //           <>
+  //             Cargando... <Spinner animation="border" size="sm" />
+  //           </>
+  //         ) : (
+  //           'Iniciar sesión'
+  //         )}
+  //       </Button>
+  //     </Form>
+  //   </div>
+  // );
 }
