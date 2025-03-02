@@ -65,6 +65,11 @@ export interface ProfileInfo {
 export interface Thesis {
     document_id: number;
     user_id_public: number;
+    public_nombre:string;
+    a_nombre:string;
+    b_nombre:string;
+    tutor_nombre:string;
+    jurado_nombre:string;
     user_id_a: number;
     user_id_b: number;
     user_id_tutor: number;

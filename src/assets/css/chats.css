@@ -9,6 +9,78 @@
 }
 
 .message-content {
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* Azul claro para los mensajes del lado izquierdo */
+.message-container.message-left .message-content {
+    background-color: #d0ebff; /* Azul claro */
+}
+
+/* Verde claro para los mensajes del lado derecho */
+.message-container.message-right .message-content {
+    background-color: #DCF8C6; /* Verde claro */
+}
+
+.message-text {
+    font-size: 14px;
+    color: #000;
+}
+
+.message-date {
+    font-size: 10px;
+    color: #666;
+}
+
+/* Alineación del texto en mensajes derechos */
+.message-container.message-right .message-text {
+    text-align: right;
+}
+.message-author {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+
+.chat-messages {
+    max-height: 300px; /* Ajusta según sea necesario */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #f1f1f1;
+}
+
+/* Personalizar scrollbar en navegadores WebKit */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* .message-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.message-container.message-right {
+    justify-content: flex-end;
+}
+
+.message-content {
     background-color: #DCF8C6; 
     padding: 8px 12px;
     border-radius: 15px;
@@ -32,7 +104,7 @@
 
 .message-content.message-right .message-text {
     text-align: right; 
-}
+} */
 
 
 /*

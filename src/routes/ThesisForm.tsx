@@ -2,8 +2,11 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import { useState } from 'react';
 import "../assets/css/thesisForm.css"
 import { API_URL_DOC } from "../constants/constants";
-import {HeaderProps} from "../app/layouts/Header"
-
+// import {HeaderProps} from "../app/layouts/Header"
+interface HeaderProps {
+    id: number;
+    rol: number;
+  }
 export default function ThesisForm({ id }: HeaderProps) {
     const [titulo, setTitulo] = useState("");
     const [integranteA, setIntegranteA] = useState("");
